@@ -44,5 +44,3 @@
     ```javascript
     var plane = Plane([10, 13, 15], 100, 200, 50)
     ```
-    
- <br></br>
