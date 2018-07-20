@@ -113,7 +113,11 @@ var c2 = Cylinder([85, thickness/2, 90], [85, thickness/2, -90], drill_size) //S
 
 var motor = Cylinder([0, -40, 0], [0, 40, 0], 50-6).add(Cylinder([0, 40, -20], [0, 80, -20], 8)).add(Plane(200,200,10,[0, 60, 0]).diff(Sphere([0, 60, -20], 100))) //Simple Motor Model
 
-return base.add(quoter).cut(quoter).add(long).cut(c1).cut(c2).add(motor) //Final operations</textarea>
+var detail = base.add(quoter).cut(quoter).add(long).cut(c1).cut(c2);
+
+detail.color(255, 0, 0)
+
+return detail.add(motor) //Final operations</textarea>
 <script type="text/javascript" src="js/textcontroll.js"></script>
 <p id="error"></p>
   <script type="text/javascript" src="js/export.js"></script>
