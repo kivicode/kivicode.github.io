@@ -34,12 +34,12 @@
     ```
     
  <br></br>
- * Draw a Plane with an optional parametr POSITION and the required parameters WIDTH, HEIGT, DEPTH
+* Draw a Plane with an optional parametr POSITION *default is [0, 0, 0]* and the required parameters WIDTH, HEIGT, DEPTH
 
   ```javascript
   Plane([pos, width, height, depth)
   ```
-  Example:
+   Example:
   
     ```javascript
     var plane = Plane([10, 13, 15], 100, 200, 50)
