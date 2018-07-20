@@ -17,9 +17,9 @@
   ```
   Example:
   
-    ```javascript
-    var sphere = Sphere([24, 12, 34], 100)
-    ```
+  ```javascript
+  var sphere = Sphere([24, 12, 34], 100)
+  ```
 
 <br></br>
 * Draw a Cylinder with an required parameters START_POSITION, END_POSITION, RADIUS
