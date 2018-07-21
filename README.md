@@ -46,4 +46,4 @@
     ```
 <br></br>
 # Basic opeartions
-![Alt text](images/Union.png?raw=true "Title")
+![GitHub Logo](../../images/Union.png)
