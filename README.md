@@ -46,4 +46,4 @@
     ```
 <br></br>
 # Basic opeartions
-   So, you have a two figures: A ![A figure](images/A.png)<br></br>and B ![B figure](images/A.png)
+   So, you have a two figures: A ![A figure](images/A.png) and B ![B figure](images/B.png)
