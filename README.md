@@ -46,4 +46,4 @@
     ```
 <br></br>
 # Basic opeartions
-![GitHub Logo](../../images/Union.png)
+![GitHub Logo](images/Union.png)
