@@ -72,4 +72,4 @@
     ```javascript
     var result = a.diff(b)
     ```
-More info about CSG operations you can read on this [wikipedia page](https://en.wikipedia.org/wiki/Constructive_solid_geometry)
+<br></br>More info about CSG operations you can read on this [wikipedia page](https://en.wikipedia.org/wiki/Constructive_solid_geometry)
