@@ -53,7 +53,8 @@
   *All this operations have the same constructor:* ```a.<operation name>(b)```
   
 * Concat
-Example:
-  ```javascript
-  var result = a.add(b)
-  ```
+
+  Example:
+    ```javascript
+    var result = a.add(b)
+    ```
