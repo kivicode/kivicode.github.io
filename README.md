@@ -66,9 +66,10 @@
     var result = a.cut(b)
     ```
     
- * **Difference**: return result of boolean opearation *A AND B* or result of CSG opeartion *Intersect*
+* **Difference**: return result of boolean opearation *A AND B* or result of CSG opeartion *Intersect*
 
   Usage:
     ```javascript
     var result = a.diff(b)
     ```
+More info about CSG operations you can read on this [wikipedia page](https://en.wikipedia.org/wiki/Constructive_solid_geometry)
