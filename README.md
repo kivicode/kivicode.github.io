@@ -4,7 +4,7 @@
   ```javascript
   Cube([position, radius)
   ```
-  Example:
+  Usage:
   
     ```javascript
     var cube = Cube([23, 12, 65], 100)
@@ -15,7 +15,7 @@
   ```javascript
   Sphere([position, radius)
   ```
-  Example:
+  Usage:
   
   ```javascript
   var sphere = Sphere([24, 12, 34], 100)
@@ -27,7 +27,7 @@
   ```javascript
   Cylinder(from, to, radius)
   ```
-  Example:
+  Usage:
   
     ```javascript
     var cylinder = Cylinder([56, 23, 12], [100, 100, 100], 100)
@@ -39,7 +39,7 @@
   ```javascript
   Plane([pos, width, height, depth)
   ```
-   Example:
+   Usage:
   
     ```javascript
     var plane = Plane([10, 13, 15], 100, 200, 50)
@@ -52,9 +52,23 @@
   <br></br>
   *All this operations have the same constructor:* ```a.<operation name>(b)```
   
-* Concat
+* **Concat**: return result of boolean opearation *A OR B* or result of CSG opeartion *Union*
 
-  Example:
+  Usage:
     ```javascript
     var result = a.add(b)
+    ```
+    
+* **Cut**: return result of boolean opearation *A NOT B* or result of CSG opeartion *Subtract*
+
+  Usage:
+    ```javascript
+    var result = a.cut(b)
+    ```
+    
+ * **Difference**: return result of boolean opearation *A AND B* or result of CSG opeartion *Intersect*
+
+  Usage:
+    ```javascript
+    var result = a.diff(b)
     ```
