@@ -46,4 +46,14 @@
     ```
 <br></br>
 # Basic opeartions
-   So, you have a two figures: A ![A figure](images/A.png) and B ![B figure](images/B.png)
+  So, you have a two figures: *cube* A and *sphere* B.
+  
+  You can do following operations with any two figures:
+  <br></br>
+  *All this operations have the same constructor:* ```a.<operation name>(b)```
+  
+* Concat
+Example:
+  ```javascript
+  var result = a.add(b)
+  ```
