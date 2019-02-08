@@ -1,0 +1,104 @@
+body {
+  background-color: rgb(23, 23, 23);
+}
+
+.upper {
+  width: 100%-0;
+  height: 50px;
+  margin-left: -8px;
+  margin-right: -8px;
+  margin-top: -8px;
+  background-color: rgb(23, 23, 23);
+}
+
+.logo {
+  width: 90px;
+  position: absolute;
+  left: 50%;
+  margin-left: -45px;
+  align-self: center;
+  top: 10px;
+}
+
+.main_heder {
+  position: relative;
+  margin-left: -8px;
+  margin-right: -10px;
+  width: 100;
+  height: 359px;
+  background: url(../images/main/gradient.png), url(../images/main/backgound.jpg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgb(51, 51, 51);
+}
+
+.my_face {
+  margin-top: 0px;
+}
+
+.my_face .name {
+  color: white;
+  text-align: center;
+  font-family: 'Arial';
+  font-size: 20px;
+}
+
+.my_face .job {
+  font-size: 14px;
+  color: rgb(170, 170, 170);
+  text-align: center;
+  font-family: 'Arial';
+}
+
+.starter {
+  height: 60px;
+  background-color: rgb(34,34,34);
+  width: 100%-0;
+  margin-left: -8px;
+  margin-right: -8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+.starter button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: 0.3s;
+  color: rgb(170, 170, 170);
+  font-size: 16px;
+  position: relative;
+  width: 150px;
+  height: inherit;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+}
+
+.starter button:hover {
+  color: rgb(62, 113, 151);
+}
+
+.starter button.active {
+  color: rgb(62, 113, 151);
+  background-color: rgb(21,21,21);
+}
+
+.tabcontent {
+  display: none;
+}
+
+@-webkit-keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
