@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
     <title>Portfolio</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" type="text/css" href="style/main.css">
     <link rel="stylesheet" type="text/css" href="style/gallery.css">
     <link rel="icon" href="images/main/favicon.png">
@@ -30,30 +32,46 @@
       <button class="tablinks" onclick="openCity(event, 'Others')">Others</button>
     </div>
 
+    <!-- Pop up windows as a Description -->
+    <div class="popup-description">
+      <div id="glands-popup" class="w3-modal">
+        <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+          <div class="w3-center"><br>
+            <span onclick="document.getElementById('glands-popup').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+            <p class="name">Meldobian Glands Detection</p>
+            <p class="task">Task<br><br>Design an algirithm to make binnary mask to highlight meldobian glands on an image</p>
+            <p class="methods">Technologies<br><br>
+              <em>
+                Python 3.6<br>
+                Opencv 4.0<br>
+                Numpy 1.16<br>
+              </em>
 
+            </p>
+            <p class="results">Results <br><br> Succsessful</p>
+        </div>
+      </div>
+    </div>
+    <!-- </div> -->
 
     <div class="gallery">
       <div id="OpenCV Python" class="tabcontent">
         <table>
           <tr>
+
             <td>
-              <div class="item" id="Glands">
+              <div class="item" id="Glands" onclick="document.getElementById('glands-popup').style.display='block'">
                 <img src="images/projects/gland_icon.png" class="image">
                 <hr class="wrapper">
-                <p>*Description*</p>
-              </div>
-            </td>
-            <td>
-              <div class="item" id="Glands">
-                <img src="images/projects/gland_icon.png" class="image">
-                <hr class="wrapper">
-                <p>*Description*</p>
+                <p>Meldobian Glands</p>
               </div>
             </td>
 
           </tr>
         </table>
       </div>
+
+
       <div id="Arduino" class="tabcontent">
         <table>
           <tr>
@@ -75,6 +93,8 @@
           </tr>
         </table>
       </div>
+
+
       <div id="Others" class="tabcontent">
         <table>
           <tr>
