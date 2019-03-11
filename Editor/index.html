@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+  <script src="lightgl.js"></script>
+  <script src="csg.js"></script>
+  <script src="viewer.js"></script>
+<script src="mirr/lib/codemirror.js"></script>
+<link rel="stylesheet" href="mirr/lib/codemirror.css">
+<script src="mirr/mode/javascript/javascript.js"></script>
+<style src="mirr/theme/dracula.css"></style>
+<script src="mirr/addon/hint/show-hint.js"></script>
+<div id="code"></div>
+<style type="text/css">
+.cm-s-dracula.CodeMirror, .cm-s-dracula .CodeMirror-gutters {
+  background-color: #282a36 !important;
+  color: #f8f8f2 !important;
+  border-radius: 25px;
+  border: solid 2px rgb(40, 41, 45);
+}
+.cm-s-dracula .CodeMirror-gutters { color: #282a36; }
+.cm-s-dracula .CodeMirror-cursor { border-left: solid thin #f8f8f0; }
+.cm-s-dracula .CodeMirror-linenumber { color: #6D8A88; }
+.cm-s-dracula .CodeMirror-selected { background: rgba(255, 255, 255, 0.10); }
+.cm-s-dracula .CodeMirror-line::selection, .cm-s-dracula .CodeMirror-line > span::selection, .cm-s-dracula .CodeMirror-line > span > span::selection { background: rgba(255, 255, 255, 0.10); }
+.cm-s-dracula .CodeMirror-line::-moz-selection, .cm-s-dracula .CodeMirror-line > span::-moz-selection, .cm-s-dracula .CodeMirror-line > span > span::-moz-selection { background: rgba(255, 255, 255, 0.10); }
+.cm-s-dracula span.cm-comment { color: #6272a4; }
+.cm-s-dracula span.cm-string, .cm-s-dracula span.cm-string-2 { color: #f1fa8c; }
+.cm-s-dracula span.cm-number { color: #bd93f9; }
+.cm-s-dracula span.cm-variable { color: #50fa7b; }
+.cm-s-dracula span.cm-variable-2 { color: white; }
+.cm-s-dracula span.cm-def { color: #50fa7b; }
+.cm-s-dracula span.cm-operator { color: #ff79c6; }
+.cm-s-dracula span.cm-keyword { color: #ff79c6; }
+.cm-s-dracula span.cm-atom { color: #bd93f9; }
+.cm-s-dracula span.cm-meta { color: #f8f8f2; }
+.cm-s-dracula span.cm-tag { color: #ff79c6; }
+.cm-s-dracula span.cm-attribute { color: #50fa7b; }
+.cm-s-dracula span.cm-qualifier { color: #50fa7b; }
+.cm-s-dracula span.cm-property { color: #66d9ef; }
+.cm-s-dracula span.cm-builtin { color: #50fa7b; }
+.cm-s-dracula span.cm-variable-3, .cm-s-dracula span.cm-type { color: #ffb86c; }
+
+.cm-s-dracula .CodeMirror-activeline-background { background: rgba(255,255,255,0.1); }
+.cm-s-dracula .CodeMirror-matchingbracket { text-decoration: underline; color: white !important; }
+
+</style>
+<style>
+body{
+  background: rgb(40, 51, 55);
+}
+
+textarea{
+  background: rgb(40, 41, 45);
+  border-radius: 25px;
+  border: solid 2px rgb(40, 41, 45);
+}
+
+.CodeMirror cm-s-dracula{
+  border: solid 1px rgb(40, 41, 45);
+  border-radius: 50px;
+}
+
+html, body {margin-left: 3px; height: 100%; overflow: hidden}
+
+button{
+  background: gray;
+  color: white;
+  border: 1px solid gray;
+  border-radius: 5px;
+  margin-left: 20px;
+  margin-bottom: 5px;
+  font-size: 10px;
+}
+
+p{
+  color: red;
+  margin-bottom: 3px;
+}
+
+canvas{
+  border-radius: 25px;
+  background: rgb(40, 41, 45);
+  border: 2px solid rgb(40, 41, 45);
+  height: 30%;
+}
+</style>
+<link rel="stylesheet" href="mirr/addon/hint/show-hint.css">
+<script src="lib/sweetalert2.all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+<style src="lib/sweetalert2.min.css"></style>
+<style type="text/css" src="css/custom.css"></style>
+<div id="0" class="viewer">
+  <!-- <canvas width="400" height="400" align="right" style="background: rgb(255,255,255)"></canvas> -->
+</div>
+
+</head>
+<body>
+  <button onclick="Save()">Save</button>
+  <button onclick="Load()">Open</button>
+  <button onclick="Export()">Export</button>
+  <button onclick="Examples()">Examples</button>
+  <textarea id="tryit" style="margin: 0px; width: 100%; height: 200px;">//Motor Grabber + Motor
+var thickness = 20; //Global variable of thickness detail
+var appendinx = Plane(25, 20, thickness, [75, 0, 0]) //Appendix to fix the a motor in the the detail
+var base = Disk(50, 80, thickness, [0,0,0]).add(appendinx) //Rounded part of the detail
+var quoter = Plane(100, 100, thickness, [100, 0, -100]) //Plane to trim the previous part
+var long = Plane(200, thickness, thickness, [-70, 0, -65]) //Botton base of the detail
+
+var drill_size = 4 //Global variable of diameter of a screw
+var c1 = Cylinder([85, -thickness/2, 90], [85, -thickness/2, -90], drill_size) //First drill cylinder
+var c2 = Cylinder([85, thickness/2, 90], [85, thickness/2, -90], drill_size) //Second drill cylinder
+
+var motor = Cylinder([0, -40, 0], [0, 40, 0], 50-6).add(Cylinder([0, 40, -20], [0, 80, -20], 8)).add(Plane(200,200,10,[0, 60, 0]).diff(Sphere([0, 60, -20], 100))) //Simple Motor Model
+
+var detail = base.add(quoter).cut(quoter).add(long).cut(c1).cut(c2);
+
+detail.color(255, 0, 0)
+
+return detail.add(motor) //Final operations</textarea>
+<script type="text/javascript" src="js/textcontroll.js"></script>
+<p id="error"></p>
+  <script type="text/javascript" src="js/export.js"></script>
+  <script src="js/main.js"></script>
+  <script type="text/javascript"></script>
+</body></html>
