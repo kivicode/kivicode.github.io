@@ -43,7 +43,7 @@ function prepare(txt) {
 
 function getDate() {
   var currentdate = new Date();
-  return currentdate.getHours() + ":" + currentdate.getMinutes();
+  return currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds();
 }
 
 function addLog(text) {
