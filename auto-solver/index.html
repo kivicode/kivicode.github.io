@@ -2,16 +2,16 @@
 <html>
 
 <head>
+  <meta charset="utf-8">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
   <script src="scripts/main.js"></script>
   <link type="text/css" rel="stylesheet" href="styles/main.css">
-  <title>Auto Solver</title>
   </link>
 
 </head>
 
-<body onLoad="run()">
+<body onLoad="setTimeout(run, 1000)">
   <section>
     <h1>Auto-solver 3000</h1>
     <div class="tbl-header">
@@ -32,10 +32,17 @@
     </div>
   </section>
 
-  <div class="made-with-love">
-    Made with
-    <i>♥</i> by
+  <div class="made-with-love" id='link'>
+    <p>Программа заходит на сайт "Решу ОГЭ Информатика" и решает первые 15 штук заданий №20 (необходимо немного подождать)</p>
+    Made by <span style="color: red;">kivicode</span>
+    <p>P.S. Можно мне "5" ? :)</p>
   </div>
+
+  <script type="text/javascript">
+    document.getElementById("link").onclick = function () {
+        location.href = "https://github.com/kivicode";
+    };
+  </script>
 
   <div id="container">
     <div id="content">

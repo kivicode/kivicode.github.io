@@ -15,8 +15,10 @@ function run() {
     url: 'https://api.flex.io/v1/me/pipes/plnflh84j2g3/run?api_key=zzhzbhfkcntndqtxmsyj',
     headers: {
       Authorization: 'Bearer {token}'
-    }
+    },
+    data : { foo : 'bar', bar : 'foo' },
   }).then(response => {
+  	console.log(response);
     myList = response.data;
     myList = Object.keys(myList).map(function(key) {
       return [Number(key), myList[key]];
@@ -30,7 +32,7 @@ function run() {
       iter++;
     }
     addLog('Answer got');
-  }).catch(response => {})
+  }).catch(response => {console.log(response);})
 }
 
 function prepare(txt) {
@@ -43,7 +45,7 @@ function prepare(txt) {
 
 function getDate() {
   var currentdate = new Date();
-  return currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds();
+  return currentdate.getHours() + ":" + currentdate.getMinutes() + ':' + currentdate.getSeconds();
 }
 
 function addLog(text) {
