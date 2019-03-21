@@ -1,3 +1,7 @@
+body {
+  background: linear-gradient(-60deg, #2193b0, #6dd5ed);
+}
+
 .main {
   margin-left: -1vh;
   margin-top: -1vh;

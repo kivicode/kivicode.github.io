@@ -5,6 +5,7 @@
   <title>Vladimir Kirilenko</title>
   <meta charset="utf-8">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <link rel="stylesheet" type="text/css" href="styles/main.css">
   <link rel="stylesheet" type="text/css" href="styles/content.css">
   <script src="scripts/main.js"></script>
@@ -25,7 +26,7 @@
   <div class="content">
     <p class="completed">Completed projects</p>
     <div class="pre-tags">Tags</div>
-    <hr style="border: 1px solid #575757; width: 30vw; float: left;">
+    <hr style="border: 1px solid #18101A; width: 30vw; float: left;">
     </hr>
     <div id="tags" class="tags">
       <div class="tag"><a>Python</a></div>
@@ -33,9 +34,15 @@
       <div class="tag"><a>Arduino</a></div>
     </div>
     <div class="project-field">
-
+      <div class='project' id='project_auto-solver'>
+        <img src="images/projects/solver.png" class="preview"></img>
+        <div class="title"><a>{{ title }}</a>
+        </div>
+      </div>
     </div>
   </div>
+  <script src="scripts/dynamic.js">
+  </script>
 </body>
 
-</html
+</html>
