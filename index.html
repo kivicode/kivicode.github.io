@@ -9,39 +9,74 @@
   <link rel="stylesheet" type="text/css" href="styles/main.css">
   <link rel="stylesheet" type="text/css" href="styles/content.css">
   <script src="scripts/main.js"></script>
+  <script src="scripts/dynamic.js"></script>
 </head>
 
 <body>
-  <div class="main-page">
-    <div class="main-filter"></div>
-    <div class="main"></div>
-    <img src="images/icon.svg" class="icon" />
-    <div class="main-text">
-      <a>Hi, I’m Vova. I develop<br>computer vision systems & software.</a>
+  <div class="start-page">
+    <section class="start-image">
+      <div class="filter"></div>
+    </section>
+    <div class="icon"></div>
+    <div class="hello">Hi, I’m Vova. I develop<br>
+      computer vision systems & software.</div>
+    <div class="pre-footer">
+      <div class="learn-more" onclick="goToContent()">Learn more</div>
+      <img class="see-more" src="images/see_more_arrow.svg" onclick="goToContent()">
     </div>
-    <a class="see-more-text" onclick="go_to_content()">Learn more about what I do</a>
-    <img src="images/see_more_arrow.svg" class="see-more" onclick="go_to_content()" />
   </div>
-
-  <div class="content">
-    <p class="completed">Completed projects</p>
-    <div class="pre-tags">Tags</div>
-    <hr style="border: 1px solid #18101A; width: 30vw; float: left;">
-    </hr>
+  <script>
+    generate();
+  </script>
+  <div id="projects-part" class="projects-part">
+    <div class="section-title">Completed projects</div>
+    <div class="tags-title">Tags</div>
+    <hr class="wrapper" />
     <div id="tags" class="tags">
-      <div class="tag"><a>Python</a></div>
-      <div class="tag"><a>OpenCV</a></div>
-      <div class="tag"><a>Arduino</a></div>
+      <tag-component v-for="tag in tags" :tag="tag" />
     </div>
-    <div class="project-field">
-      <div class='project' id='project_auto-solver'>
-        <img src="images/projects/solver.png" class="preview"></img>
-        <div class="title"><a>{{ title }}</a>
+    <div class="content-field">
+      <div class="project">
+        <div class="preview-img">
+          <img src="images/projects/solver.png" />
+        </div>
+        <div class="preview-title">
+          <a>Arduino</a>
         </div>
       </div>
+
+      <div class="project">
+        <div class="preview-img">
+          <img src="images/projects/solver.png" />
+        </div>
+        <div class="preview-title">
+          <a>Arduino</a>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="preview-img">
+          <img src="images/projects/solver.png" />
+        </div>
+        <div class="preview-title">
+          <a>Arduino</a>
+        </div>
+      </div>
+
+
+      <div class="project">
+        <div class="preview-img">
+          <img src="images/projects/solver.png" />
+        </div>
+        <div class="preview-title">
+          <a>Arduino</a>
+        </div>
+      </div>
+      </ul>
     </div>
   </div>
-  <script src="scripts/dynamic.js">
+  <script>
+    render();
   </script>
 </body>
 

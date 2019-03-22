@@ -1,6 +1,6 @@
-function go_to_content() {
+function goToContent() {
   $('html,body').animate({
-      scrollTop: $(".content").offset().top
+      scrollTop: $(".projects-part").offset().top
     },
     'slow');
 }

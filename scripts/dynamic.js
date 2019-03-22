@@ -1,20 +1,36 @@
-function toTitle(str) {
-  return str.replace(
-    /\w\S*/g,
-    function(txt) {
-      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    }
-  );
+let tags;
+let generated = false;
+
+function loadTags() {
+  return $.ajax({
+    url: "../data/tags.json",
+    dataType: "json",
+  }).done(function(d) {
+    tags = d;
+  });
 }
 
-var apps = []
+function render() {
+  $.when(loadTags()).done(function(a1) {
+    let vue = new Vue({
+      el: '#tags',
+      data: {
+        tags
+      }
+    });
+  })
+}
 
-for (var project of document.getElementsByClassName('project')) {
-  // console.log(project.id);
-  apps.push(new Vue({
-    el: '#' + project.id,
-    data: {
-      title: toTitle(project.id.toString().split('project_')[1].replace('-', ' '))
+function generate() {
+
+  Vue.component('tag-component', {
+    template: `
+      <div class="tag">
+      <a>{{ tag.name }}</a>
+      </div>
+    `,
+    props: {
+      tag: Object
     }
-  }))
+  });
 }
