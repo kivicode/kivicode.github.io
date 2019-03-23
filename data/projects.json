@@ -1,3 +1,13 @@
 [{
-  "name": "This web site"
+  "name": "PYT",
+  "img": "solver.png",
+  "tags": ["python"]
+}, {
+  "name": "WEB",
+  "img": "eurobot-2018.png",
+  "tags": ["web"]
+}, {
+  "name": "ARD",
+  "img": "eurobot-2018.png",
+  "tags": ["arduino"]
 }]

@@ -30,49 +30,25 @@
   </script>
   <div id="projects-part" class="projects-part">
     <div class="section-title">Completed projects</div>
-    <div class="tags-title">Tags</div>
+    <div class="tags-title">Select tags</div>
     <hr class="wrapper" />
     <div id="tags" class="tags">
       <tag-component v-for="tag in tags" :tag="tag" />
     </div>
-    <div class="content-field">
-      <div class="project">
+    <div class="content-field" id='content-field'>
+
+      <project-component v-for="project in projects" :project="project" />
+
+      <!-- <div id="projects" class="project">
         <div class="preview-img">
           <img src="images/projects/solver.png" />
         </div>
         <div class="preview-title">
           <a>Arduino</a>
         </div>
-      </div>
-
-      <div class="project">
-        <div class="preview-img">
-          <img src="images/projects/solver.png" />
-        </div>
-        <div class="preview-title">
-          <a>Arduino</a>
-        </div>
-      </div>
-
-      <div class="project">
-        <div class="preview-img">
-          <img src="images/projects/solver.png" />
-        </div>
-        <div class="preview-title">
-          <a>Arduino</a>
-        </div>
-      </div>
+      </div> -->
 
 
-      <div class="project">
-        <div class="preview-img">
-          <img src="images/projects/solver.png" />
-        </div>
-        <div class="preview-title">
-          <a>Arduino</a>
-        </div>
-      </div>
-      </ul>
     </div>
   </div>
   <script>

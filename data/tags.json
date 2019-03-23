@@ -1,9 +1,13 @@
 [{
-  "name": "Python"
+  "name": "Python",
+  "color": "Python"
 }, {
+  "color": "C",
   "name": "Computer Vision"
 }, {
+  "color": "HTML",
   "name": "Web"
 }, {
+  "color": "Python",
   "name": "Arduino"
 }]
