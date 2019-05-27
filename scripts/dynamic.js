@@ -6,18 +6,13 @@ let tags_app, projects_app;
 
 let filters = [];
 
+let whiteList = [
+  "Kinect"
+]
 
-function loadTags() {
-  return $.ajax({
-    url: "../data/tags.json",
-    dataType: "json",
-  }).done(function(d) {
-    tags = d;
-  });
-}
 let test_l;
 
-let repos, lng, icon;
+let repos, lng, icon, readme;
 
 let projects_test = []
 
@@ -32,7 +27,6 @@ function generateGitHubProjects() {
           project["img"] = url
           project["name"] = repo.name;
           let langs = [];
-          // let sliced = lng.slice(0, Math.min(4, Object.keys(lng).length));
           for (var i of Object.keys(lng).slice(0, Math.min(5, Object.keys(lng).length)).map(entry => entry)) {
             let freq = lng[i]
             let name = i
@@ -46,6 +40,8 @@ function generateGitHubProjects() {
   })
 }
 
+let langs = []
+
 function getRepos() {
   return $.ajax({
     url: "https://api.github.com/users/kivicode/repos",
@@ -55,21 +51,28 @@ function getRepos() {
     for (r in repos) {
       let project = {}
       let repo = repos[r]
-      $.when(getLangs(repo.name)).done(function(b) {
-        if (Object.keys(lng).length > 0) {
-          let url = "https://raw.githubusercontent.com/kivicode/" + "AndroidDetector" + "/master/icon.png"
-          project["img"] = url
-          project["name"] = repo.name;
-          let langs = [];
-          // let sliced = lng.slice(0, Math.min(4, Object.keys(lng).length));
-          for (var i of Object.keys(lng).slice(0, Math.min(5, Object.keys(lng).length)).map(entry => entry)) {
-            let freq = lng[i]
-            let name = i
-            langs.push([freq, name])
+      if (whiteList.includes(repo.name)) {
+        $.when(getLangs(repo.name), getGitReadme(repo)).done(function(b, c) {
+          if (Object.keys(lng).length > 0) {
+            let url = "https://raw.githubusercontent.com/kivicode/" + "AndroidDetector" + "/master/icon.png"
+            project["img"] = url
+            project["name"] = repo.name;
+            project["readme"] = readme;
+            let langs = [];
+            for (var i of Object.keys(lng).slice(0, Math.min(5, Object.keys(lng).length)).map(entry => entry)) {
+              let freq = lng[i]
+              let name = i
+              langs.push([freq, name])
+            }
+            project["langs"] = langs;
+            // getColorMap({
+            //   "project": project
+            // })
+            console.log("AA");
+            projects_test.push(project)
           }
-          projects_test.push(project)
-        }
-      })
+        })
+      }
     }
   });
 }
@@ -78,8 +81,15 @@ function getGitIcon(repo) {
   return $.ajax({
     url: "https://raw.githubusercontent.com/kivicode/" + "AndroidDetector" + "/master/icon.png"
   }).done(function(icn) {
-    console.log(icn);
     icon = icn
+  });
+}
+
+function getGitReadme(repo) {
+  return $.ajax({
+    url: "https://raw.githubusercontent.com/kivicode/" + repo.name + "/master/README.md"
+  }).done(function(rm) {
+    readme = rm;
   });
 }
 
@@ -123,20 +133,21 @@ function getFilteredProjects() {
 }
 
 function render() {
-  $.when(loadTags(), loadColors()).done(function() {
-    tags_app = new Vue({
-      el: '#tags',
-      data: {
-        tags
-      }
-    });
+  $.when(getRepos()).done(function() {
 
-    $.when(getRepos()).done(function() {
+    $.when(loadColors()).done(function() {
       projects = projects_test;
       projects_app = new Vue({
         el: '#content-field',
         data: {
           projects: getFilteredProjects().length == 0 ? projects : getFilteredProjects()
+        }
+      });
+      console.log("unnormalized");
+      tags_app = new Vue({
+        el: '#tags',
+        data: {
+          tags
         }
       });
     });
@@ -159,7 +170,6 @@ function updateFilter(id) {
 
   let filt = getFilteredProjects();
   projects_app.projects = filt;
-  console.log(filt.length, filters.length)
   if (filt.length == 0 && filters.length > 0) {
     projects_app.projects = [];
   } else if (filt.length == 0 && filters.length == 0) {
@@ -184,6 +194,42 @@ function getRepoName(v) {
   return v._props.project.name.match(/[A-Z, _][a-z]+/g).join(' ');
 }
 
+function translateReadme(v) {
+  return markdown.toHTML(v._props.project.readme);
+}
+
+function getColorMap(v) {
+  let langs = v.project.langs;
+  let total = 0;
+  for (l of langs) {
+    total += l[0];
+  }
+  let normalized = []
+  for (l of langs) {
+    let percent = parseInt(100 * (l[0] / total));
+    if (percent > 5) {
+      let nm = {}
+      nm["name"] = l[1];
+      nm["percent"] = percent;
+      nm["color"] = colors[l[1]];
+      normalized.push(nm);
+    }
+  }
+  normalized.sort(function(a, b) {
+    return b.percent - a.percent;
+  })
+  console.log("normalized");
+  let out = '';
+  let lastPercent = 0;
+  for (n of normalized) {
+    out += n['color'] + " " + lastPercent + "%, " + n['color'] + " " + (lastPercent + n['percent']) + '%, '
+    lastPercent = n['percent']
+  }
+  out = out.slice(0, out.length - 2)
+
+  return out;
+}
+
 function generate() {
   Vue.component('tag-component', {
     template: `
@@ -198,7 +244,7 @@ function generate() {
           background: getColor(this),
         },
         id: getName(this),
-        onclick: 'updateFilter("' + getName(this) + '")'
+        onclick: 'updateFilter("' + getName(this) + ');'
       }
     },
     props: {
@@ -208,33 +254,35 @@ function generate() {
 
 
   Vue.component('project-component', {
+    data() {
+      return {
+        src: getImg(this),
+        name: getRepoName(this),
+        hrefname: '#' + this._props.project.name,
+        descriotion: translateReadme(this),
+        style: {
+          background: 'linear-gradient(to right, ' + getColorMap(this),
+        },
+      }
+    },
     template: `
     <div id="projects" class="project">
       <div class="preview-img">
         <img :src="src" />
       </div>
       <div class="preview-title">
+      <div class="preview-lang" :style="style"></div>
         <a class="button" :href="hrefname">{{ project.name }}</a>
       </div>
-
       <div :id="project.name" class="overlay">
       	<div class="popup">
-      		<h3>{{ name }}</h3>
       		<a class="close" href="#content-field">×</a>
-      		<div class="content">
-      			Thank to pop me out of that button, but now i'm done so you can close this window.
+      		<div class="content" v-html="descriotion">
       		</div>
       	</div>
       </div>
     </div>
     `,
-    data() {
-      return {
-        src: getImg(this),
-        name: getRepoName(this),
-        hrefname: '#' + this._props.project.name
-      }
-    },
     props: {
       project: Object
     }

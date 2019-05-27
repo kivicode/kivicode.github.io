@@ -1,8 +1,8 @@
 .button {
   position: relative;
+  height: 100%;
   z-index: 99;
   font-size: 1em;
-  padding: 10px;
   color: #fff;
   text-decoration: none;
   cursor: pointer;
@@ -35,12 +35,13 @@
 }
 
 .popup {
-  margin: 70px auto;
+  margin: 5vh auto;
   padding: 20px;
   background: #fff;
   border-radius: 5px;
-  width: 45%;
+  width: 95vw;
   position: relative;
+  overflow: auto;
   /* transition: all 5s ease-in-out; */
 }
 
@@ -67,6 +68,7 @@
 }
 
 .popup .content {
-  max-height: 30%;
-  overflow: auto;
+  max-width: 100vw;
+  max-height: 85vh;
+  overflow: scroll;
 }
